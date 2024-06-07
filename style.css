@@ -1,10 +1,54 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #48d1cc; 
+  border-radius: 6px;
+  border: 3px solid #0d0d0d; 
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin; 
+  scrollbar-color: #48d1cc #0d0d0d; 
+}
+
 body {
   font-family: "Be Vietnam Pro", sans-serif;
   font-size: 300;
@@ -12,14 +56,21 @@ body {
   padding: 0;
   background-color: #0d0d0d;
   color: #e0e0e0;
+  overflow-y: scroll;
+  scrollbar-color: #48d1cc #0d0d0d;
+  scrollbar-width: thin;
 }
 
-header {
-  background-color: #1c1c1c;
-  color: white;
-  padding: 1em 0;
+header h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 3rem;
+  margin-top: 2rem 1rem;
+  color: #ffdd57;
   text-align: center;
+  animation: fadeIn 2s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 
 section {
   margin: 2em 0;
@@ -29,13 +80,23 @@ section {
   flex-direction: column;
 }
 
-h2 {
+section h2, section p {
+  text-align: center;
+  animation: slideIn 1s ease-out;
+}
+
+section h2 {
+  font-size: 2rem;
   color: #48d1cc;
+  margin-bottom: 1rem;
 }
 
 section p {
-  padding: 1rem 5rem;
-  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 ul {
@@ -49,24 +110,35 @@ ul {
   gap: 2rem;
 }
 
+
+
 li {
   background-color: #1e1e1e;
   border-radius: 5px;
   margin-bottom: 1em;
   padding: 1em;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0; /* Start hidden */
+  transform: translateY(20px); /* Start slightly below */
 }
 
 li:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
+
+li.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
 
 img {
   max-width: 34rem;
@@ -79,15 +151,16 @@ img {
 
 button {
   background-color: #48d1cc;
-  padding: 8px 20px;
+  padding: 10px 20px;
   border: none;
-  outline: none;
-  cursor: pointer;
   border-radius: 5px;
   color: #0d0d0d;
   font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 800;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: fadeIn 2s ease-in-out;
 }
 
 button:hover {
@@ -102,7 +175,7 @@ h3 {
 /* Search input styling */
 
 #search {
-  background-color: #0d0d0d;
+  background-color: #1c1c1c;
   color: #e0e0e0;
   width: 100%;
   padding: 10px;
@@ -128,29 +201,31 @@ h3 {
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* background-color: rgba(0, 0, 0, 0.5);  */
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .modal-content {
   background-color: #1c1c1c;
-  margin: 20% auto;
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #48d1cc;
   width: 80%;
   border-radius: 10px;
-  max-width: 600px; /* Max width of modal */
+  max-width: 600px;
+  animation: slideIn 0.5s ease-out;
 }
 
 .close-btn {
-  color: #48d1cc;
+  color: #aaa;
   float: right;
-  font-size: 34px;
+  font-size: 28px;
   font-weight: bold;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-  color: #b0eeec;
+  color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
@@ -185,12 +260,17 @@ h3 {
     max-height: 18rem;
     min-height: 18rem;
   }
-}
 
-@media screen and (max-width: 584px) {
   section p {
     padding: 1rem 3rem;
   }
+}
+
+@media screen and (max-width: 584px) {
+  header h1{
+    font-size: 2.5rem;
+  }
+
 
   img {
     max-width: 28rem;
