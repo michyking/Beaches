@@ -76,6 +76,7 @@ modal.innerHTML = `
 document.body.appendChild(modal);
 
 // Modal functionality
+
 const modalContent = document.querySelector(".modal-content");
 const modalText = document.getElementById("modal-text");
 const modalCloseBtn = document.querySelector(".close-btn");
@@ -84,8 +85,8 @@ document.addEventListener("click", function (event) {
   if (event.target.classList.contains("modal-btn")) {
     const listItem = event.target.closest("li");
     const p = listItem.querySelector("p");
-    modalText.textContent = p.textContent; // Set modal content to the text content of the <p> tag
-    modal.style.display = "block"; // Display modal
+    modalText.textContent = p.textContent; 
+    modal.style.display = "block"; 
   }
 });
 
@@ -94,6 +95,7 @@ modalCloseBtn.addEventListener("click", function () {
 });
 
 // Create search bar
+
 const searchInput = document.createElement("input");
 searchInput.type = "text";
 searchInput.id = "search";
@@ -101,6 +103,7 @@ searchInput.placeholder = "Search for beaches...";
 document.body.insertBefore(searchInput, document.body.firstChild);
 
 // Search filter functionality
+
 searchInput.addEventListener("keyup", function () {
   const filter = searchInput.value.toLowerCase();
   for (let i = 0; i < listItems.length; i++) {
